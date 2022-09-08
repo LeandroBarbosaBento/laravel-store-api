@@ -12,6 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const TYPE_CLIENT = 0;
+    const TYPE_PROVIDER = 1;
+
+    const AVAILABLE_TYPES = [
+        self::TYPE_CLIENT,
+        self::TYPE_PROVIDER,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +28,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'type',
         'password',
     ];
 
