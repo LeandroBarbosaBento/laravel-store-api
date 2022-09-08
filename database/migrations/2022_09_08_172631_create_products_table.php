@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->float('price');
-            $table->foreignId(Category::class);
-            $table->foreignId(User::class);
+            $table->foreignId('categories_id')->constrained();
+            $table->foreignId('users_id')->constrained();
             $table->timestamps();
         });
     }
