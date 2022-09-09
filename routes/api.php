@@ -26,14 +26,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('categories', CategoryController::class)
-        ->only('store', 'update')
+        ->only('store')
         ->middleware('auth:sanctum');
 
 Route::apiResource('categories', CategoryController::class)
         ->only('index');
 
 Route::apiResource('products', ProductController::class)
-        ->only('store', 'update', 'destroy')
+        ->only('store')
         ->middleware('auth:sanctum');
 
 Route::apiResource('products', ProductController::class)
