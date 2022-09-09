@@ -12,9 +12,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        //
+        return $product->get();
     }
 
     /**
@@ -23,9 +23,28 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'categories_id' => 'required',
+        ]);
+
+        $productData = $request->only('name', 'price', 'categories_id');
+
+        $productData['users_id'] = auth()->user()->id;
+
+        if(!$product = $product->create($productData))
+        {
+            abort(500, 'Error to create a new product!');
+        }
+
+        return response()->json([
+            'data' => [
+                'product' => $product,
+            ]
+        ]);
     }
 
     /**
