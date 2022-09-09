@@ -29,6 +29,9 @@ Route::apiResource('categories', CategoryController::class)
         ->only('store', 'update', 'destroy')
         ->middleware('auth:sanctum');
 
+Route::apiResource('categories', CategoryController::class)
+        ->only('index');
+
 Route::apiResource('products', ProductController::class)
         ->only('store', 'update', 'destroy')
         ->middleware('auth:sanctum');

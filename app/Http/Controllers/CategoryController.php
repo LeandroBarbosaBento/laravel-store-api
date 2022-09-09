@@ -12,9 +12,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category)
     {
-        //
+        return $category->get();
     }
 
     /**
@@ -23,9 +23,26 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $categoryData = $request->only('name');
+
+        $categoryData['users_id'] = auth()->user()->id;
+
+        if(!$category = $category->create($categoryData))
+        {
+            abort(500, 'Error to create a new category!');
+        }
+
+        return response()->json([
+            'data' => [
+                'category' => $category,
+            ]
+        ]);
     }
 
     /**
