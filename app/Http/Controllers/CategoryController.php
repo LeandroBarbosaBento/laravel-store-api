@@ -25,6 +25,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request, Category $category)
     {
+        $this->authorize('store', $category);
+
         $request->validate([
             'name' => 'required',
         ]);

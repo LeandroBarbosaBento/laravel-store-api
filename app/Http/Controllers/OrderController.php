@@ -16,6 +16,8 @@ class OrderController extends Controller
      */
     public function index(Order $order)
     {
+        $this->authorize('index', $order);
+
         return $order->where(
             'users_id', auth()->user()->id
             )->get();
@@ -29,6 +31,8 @@ class OrderController extends Controller
      */
     public function store(Request $request, Order $order, OrderProduct $orderProduct, Product $product)
     {
+
+        $this->authorize('store', $order);
 
         $request->validate([
             'total' => 'required',
@@ -56,6 +60,7 @@ class OrderController extends Controller
             $productOrderData = [
                 'products_id' => $productModel->id,
                 'product_price' => $productModel->price,
+                'product_name' => $productModel->name,
                 'orders_id' => $order->id,
                 'amount' => $product_client['amount'],
                 'value' => $productModel->price * $product_client['amount'],
@@ -81,9 +86,18 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Order $order, OrderProduct $orderProduct)
     {
-        //
+        $this->authorize('show', $order);
+
+        $orderProduct = $orderProduct->where('orders_id', $order->id)->get();
+
+        return response()->json([
+            'data' => [
+                'order' => $order,
+                'products' => $orderProduct,
+            ]
+        ]);
     }
 
     /**

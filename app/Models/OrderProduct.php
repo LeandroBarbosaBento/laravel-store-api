@@ -13,6 +13,7 @@ class OrderProduct extends Model
         'products_id',
         'orders_id',
         'product_price',
+        'product_name',
         'amount',
         'value'
     ];
