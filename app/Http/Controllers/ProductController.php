@@ -34,7 +34,7 @@ class ProductController extends Controller
             'categories_id' => 'required',
         ]);
 
-        $productData = $request->only('name', 'price', 'categories_id');
+        $productData = $request->only('name', 'price', 'categories_id', 'unit');
 
         $productData['users_id'] = auth()->user()->id;
 
