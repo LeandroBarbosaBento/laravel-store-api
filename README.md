@@ -1,3 +1,17 @@
+# Iniciar o projeto
+
+Para iniciar o projeto basta configurar os dados de acesso ao banco de dados no arquivo ".env" e rodar os seguintes comandos no terminal estando na raiz do projeto:
+
+```bash
+composer install
+php artisan migrate
+php artisan serve
+```
+
+
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
